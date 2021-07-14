@@ -71,7 +71,7 @@
 
 #set_property -dict { PACKAGE_PIN H17   IOSTANDARD LVCMOS33 } [get_ports { hdmi_rx_cec }]; #IO_L13N_T2_MRCC_35 Sch=HDMI_RX_CEC
 set_property -dict { PACKAGE_PIN P19   IOSTANDARD TMDS_33  } [get_ports { TMDS_clk_n }]; #IO_L13N_T2_MRCC_34 Sch=HDMI_RX_CLK_N
-#create_clock -period 8.334 -waveform {0.000 4.167} [get_ports TMDS_clk_p]
+create_clock -period 13.461 -waveform {0.000 6.73} [get_ports TMDS_clk_p]
 set_property -dict { PACKAGE_PIN W20   IOSTANDARD TMDS_33  } [get_ports { TMDS_data_n[0]}]; #IO_L16N_T2_34 Sch=HDMI_RX_D0_N
 set_property -dict { PACKAGE_PIN V20   IOSTANDARD TMDS_33  } [get_ports { TMDS_data_p[0]}]; #IO_L16P_T2_34 Sch=HDMI_RX_D0_P
 set_property -dict { PACKAGE_PIN U20   IOSTANDARD TMDS_33  } [get_ports { TMDS_data_n[1]}]; #IO_L15N_T2_DQS_34 Sch=HDMI_RX_D1_N
