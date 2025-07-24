@@ -20,7 +20,7 @@ set script_folder [_tcl::get_script_folder]
 ################################################################
 # Check if script is running in correct Vivado version.
 ################################################################
-set scripts_vivado_version 2024.1
+set scripts_vivado_version 2025.1
 set current_vivado_version [version -short]
 
 if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
@@ -933,25 +933,78 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net rgb2dvi_0_TMDS [get_bd_intf_ports hdmi_tx] [get_bd_intf_pins rgb2dvi_0/TMDS]
 
   # Create port connections
-  connect_bd_net -net Audio_Stream_PWM_0_AUD_PWM [get_bd_pins Audio_Stream_PWM_0/AUD_PWM] [get_bd_ports aud_pwm]
-  connect_bd_net -net Audio_Stream_PWM_0_AUD_SD [get_bd_pins Audio_Stream_PWM_0/AUD_SD] [get_bd_ports aud_sd]
-  connect_bd_net -net axi_dma_0_mm2s_introut [get_bd_pins axi_dma_0/mm2s_introut] [get_bd_pins irpt_concat/In1]
-  connect_bd_net -net btn_1 [get_bd_ports btn] [get_bd_pins user_io_0/btn]
-  connect_bd_net -net dvi2rgb_0_PixelClk [get_bd_pins dvi2rgb_0/PixelClk] [get_bd_pins rgb2dvi_0/PixelClk]
-  connect_bd_net -net dvi2rgb_0_aPixelClkLckd [get_bd_pins dvi2rgb_0/aPixelClkLckd] [get_bd_pins rgb2dvi_0/aRst_n]
-  connect_bd_net -net hdmi_tx_hpdn_1 [get_bd_ports hdmi_tx_hpdn] [get_bd_pins invert/Op1]
-  connect_bd_net -net invert_Res [get_bd_pins invert/Res] [get_bd_ports hdmi_rx_hpa]
-  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins Audio_Stream_PWM_0/S_AXIS_MM2S_ACLK] [get_bd_pins Audio_Stream_PWM_0/s_axi_aclk] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins rgb_led_0/s00_axi_aclk] [get_bd_pins user_io_0/s00_axi_aclk] [get_bd_pins axi_dma_0/s_axi_lite_aclk] [get_bd_pins axi_dma_0/m_axi_mm2s_aclk] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins processing_system7_0_axi_periph/ACLK] [get_bd_pins processing_system7_0_axi_periph/S00_ACLK] [get_bd_pins processing_system7_0_axi_periph/M00_ACLK] [get_bd_pins processing_system7_0_axi_periph/M01_ACLK] [get_bd_pins processing_system7_0_axi_periph/M02_ACLK] [get_bd_pins processing_system7_0_axi_periph/M03_ACLK] [get_bd_pins processing_system7_0_axi_periph/M04_ACLK] [get_bd_pins rst_processing_system7_0_100M/slowest_sync_clk] [get_bd_pins xadc_wiz_0/s_axi_aclk]
-  connect_bd_net -net processing_system7_0_FCLK_CLK1 [get_bd_pins processing_system7_0/FCLK_CLK1] [get_bd_pins dvi2rgb_0/RefClk]
-  connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins dvi2rgb_0/aRst_n] [get_bd_pins rst_processing_system7_0_100M/ext_reset_in]
-  connect_bd_net -net rgb_led_0_rgb0 [get_bd_pins rgb_led_0/rgb0] [get_bd_ports rgb1]
-  connect_bd_net -net rgb_led_0_rgb1 [get_bd_pins rgb_led_0/rgb1] [get_bd_ports rgb2]
-  connect_bd_net -net rst_processing_system7_0_100M_interconnect_aresetn [get_bd_pins rst_processing_system7_0_100M/interconnect_aresetn] [get_bd_pins axi_mem_intercon/ARESETN] [get_bd_pins processing_system7_0_axi_periph/ARESETN]
-  connect_bd_net -net rst_processing_system7_0_100M_peripheral_aresetn1 [get_bd_pins rst_processing_system7_0_100M/peripheral_aresetn] [get_bd_pins Audio_Stream_PWM_0/S_AXIS_MM2S_ARESETN] [get_bd_pins Audio_Stream_PWM_0/s_axi_aresetn] [get_bd_pins rgb_led_0/s00_axi_aresetn] [get_bd_pins user_io_0/s00_axi_aresetn] [get_bd_pins axi_dma_0/axi_resetn] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins processing_system7_0_axi_periph/S00_ARESETN] [get_bd_pins processing_system7_0_axi_periph/M00_ARESETN] [get_bd_pins processing_system7_0_axi_periph/M01_ARESETN] [get_bd_pins processing_system7_0_axi_periph/M02_ARESETN] [get_bd_pins processing_system7_0_axi_periph/M03_ARESETN] [get_bd_pins processing_system7_0_axi_periph/M04_ARESETN] [get_bd_pins xadc_wiz_0/s_axi_aresetn]
-  connect_bd_net -net sw_1 [get_bd_ports sw] [get_bd_pins user_io_0/sw]
-  connect_bd_net -net user_io_0_led [get_bd_pins user_io_0/led] [get_bd_ports led]
-  connect_bd_net -net xadc_wiz_0_ip2intc_irpt [get_bd_pins xadc_wiz_0/ip2intc_irpt] [get_bd_pins irpt_concat/In0]
-  connect_bd_net -net xlconcat_0_dout [get_bd_pins irpt_concat/dout] [get_bd_pins processing_system7_0/IRQ_F2P]
+  connect_bd_net -net Audio_Stream_PWM_0_AUD_PWM  [get_bd_pins Audio_Stream_PWM_0/AUD_PWM] \
+  [get_bd_ports aud_pwm]
+  connect_bd_net -net Audio_Stream_PWM_0_AUD_SD  [get_bd_pins Audio_Stream_PWM_0/AUD_SD] \
+  [get_bd_ports aud_sd]
+  connect_bd_net -net axi_dma_0_mm2s_introut  [get_bd_pins axi_dma_0/mm2s_introut] \
+  [get_bd_pins irpt_concat/In1]
+  connect_bd_net -net btn_1  [get_bd_ports btn] \
+  [get_bd_pins user_io_0/btn]
+  connect_bd_net -net dvi2rgb_0_PixelClk  [get_bd_pins dvi2rgb_0/PixelClk] \
+  [get_bd_pins rgb2dvi_0/PixelClk]
+  connect_bd_net -net dvi2rgb_0_aPixelClkLckd  [get_bd_pins dvi2rgb_0/aPixelClkLckd] \
+  [get_bd_pins rgb2dvi_0/aRst_n]
+  connect_bd_net -net hdmi_tx_hpdn_1  [get_bd_ports hdmi_tx_hpdn] \
+  [get_bd_pins invert/Op1]
+  connect_bd_net -net invert_Res  [get_bd_pins invert/Res] \
+  [get_bd_ports hdmi_rx_hpa]
+  connect_bd_net -net processing_system7_0_FCLK_CLK0  [get_bd_pins processing_system7_0/FCLK_CLK0] \
+  [get_bd_pins Audio_Stream_PWM_0/S_AXIS_MM2S_ACLK] \
+  [get_bd_pins Audio_Stream_PWM_0/s_axi_aclk] \
+  [get_bd_pins rgb_led_0/s00_axi_aclk] \
+  [get_bd_pins user_io_0/s00_axi_aclk] \
+  [get_bd_pins axi_dma_0/s_axi_lite_aclk] \
+  [get_bd_pins axi_dma_0/m_axi_mm2s_aclk] \
+  [get_bd_pins axi_mem_intercon/ACLK] \
+  [get_bd_pins axi_mem_intercon/S00_ACLK] \
+  [get_bd_pins axi_mem_intercon/M00_ACLK] \
+  [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] \
+  [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] \
+  [get_bd_pins processing_system7_0_axi_periph/ACLK] \
+  [get_bd_pins processing_system7_0_axi_periph/S00_ACLK] \
+  [get_bd_pins processing_system7_0_axi_periph/M00_ACLK] \
+  [get_bd_pins processing_system7_0_axi_periph/M01_ACLK] \
+  [get_bd_pins processing_system7_0_axi_periph/M02_ACLK] \
+  [get_bd_pins processing_system7_0_axi_periph/M03_ACLK] \
+  [get_bd_pins processing_system7_0_axi_periph/M04_ACLK] \
+  [get_bd_pins rst_processing_system7_0_100M/slowest_sync_clk] \
+  [get_bd_pins xadc_wiz_0/s_axi_aclk]
+  connect_bd_net -net processing_system7_0_FCLK_CLK1  [get_bd_pins processing_system7_0/FCLK_CLK1] \
+  [get_bd_pins dvi2rgb_0/RefClk]
+  connect_bd_net -net processing_system7_0_FCLK_RESET0_N  [get_bd_pins processing_system7_0/FCLK_RESET0_N] \
+  [get_bd_pins dvi2rgb_0/aRst_n] \
+  [get_bd_pins rst_processing_system7_0_100M/ext_reset_in]
+  connect_bd_net -net rgb_led_0_rgb0  [get_bd_pins rgb_led_0/rgb0] \
+  [get_bd_ports rgb1]
+  connect_bd_net -net rgb_led_0_rgb1  [get_bd_pins rgb_led_0/rgb1] \
+  [get_bd_ports rgb2]
+  connect_bd_net -net rst_processing_system7_0_100M_interconnect_aresetn  [get_bd_pins rst_processing_system7_0_100M/interconnect_aresetn] \
+  [get_bd_pins axi_mem_intercon/ARESETN] \
+  [get_bd_pins processing_system7_0_axi_periph/ARESETN]
+  connect_bd_net -net rst_processing_system7_0_100M_peripheral_aresetn1  [get_bd_pins rst_processing_system7_0_100M/peripheral_aresetn] \
+  [get_bd_pins Audio_Stream_PWM_0/S_AXIS_MM2S_ARESETN] \
+  [get_bd_pins Audio_Stream_PWM_0/s_axi_aresetn] \
+  [get_bd_pins rgb_led_0/s00_axi_aresetn] \
+  [get_bd_pins user_io_0/s00_axi_aresetn] \
+  [get_bd_pins axi_dma_0/axi_resetn] \
+  [get_bd_pins axi_mem_intercon/S00_ARESETN] \
+  [get_bd_pins axi_mem_intercon/M00_ARESETN] \
+  [get_bd_pins processing_system7_0_axi_periph/S00_ARESETN] \
+  [get_bd_pins processing_system7_0_axi_periph/M00_ARESETN] \
+  [get_bd_pins processing_system7_0_axi_periph/M01_ARESETN] \
+  [get_bd_pins processing_system7_0_axi_periph/M02_ARESETN] \
+  [get_bd_pins processing_system7_0_axi_periph/M03_ARESETN] \
+  [get_bd_pins processing_system7_0_axi_periph/M04_ARESETN] \
+  [get_bd_pins xadc_wiz_0/s_axi_aresetn]
+  connect_bd_net -net sw_1  [get_bd_ports sw] \
+  [get_bd_pins user_io_0/sw]
+  connect_bd_net -net user_io_0_led  [get_bd_pins user_io_0/led] \
+  [get_bd_ports led]
+  connect_bd_net -net xadc_wiz_0_ip2intc_irpt  [get_bd_pins xadc_wiz_0/ip2intc_irpt] \
+  [get_bd_pins irpt_concat/In0]
+  connect_bd_net -net xlconcat_0_dout  [get_bd_pins irpt_concat/dout] \
+  [get_bd_pins processing_system7_0/IRQ_F2P]
 
   # Create address segments
   assign_bd_address -offset 0x00000000 -range 0x20000000 -target_address_space [get_bd_addr_spaces axi_dma_0/Data_MM2S] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] -force
